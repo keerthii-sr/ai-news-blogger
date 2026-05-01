@@ -3,7 +3,7 @@ import requests
 from groq import Groq
 import smtplib
 
-# API Keys
+# Load API keys securely
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 NEWS_API = st.secrets["NEWS_API_KEY"]
 
@@ -24,7 +24,7 @@ if st.button("Generate AI Blog"):
     st.write("🗞️ News Headlines:")
     st.write(news_text)
 
-    # AI blog generation
+    # Generate blog
     prompt = f"Write a blog article based on this news:\n{news_text}"
 
     ai_response = client.chat.completions.create(
@@ -37,19 +37,20 @@ if st.button("Generate AI Blog"):
     st.subheader("✍️ Generated Blog")
     st.write(blog)
 
-sender = "keerthigowda366@gmail.com"
-receiver = "keerthigowda366@gmail.com"
-password = "cvwlkrcriafrvurn"
+    # ✅ EMAIL CODE INSIDE BUTTON (IMPORTANT)
+    sender = st.secrets["EMAIL"]
+    receiver = st.secrets["EMAIL"]
+    password = st.secrets["EMAIL_PASSWORD"]
 
-try:
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(sender, password)
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(sender, password)
 
-    server.sendmail(sender, receiver, blog)
-    server.quit()
+        server.sendmail(sender, receiver, blog)
+        server.quit()
 
-    st.success("📩 Email sent successfully!")
+        st.success("📩 Email sent successfully!")
 
-except Exception as e:
-    st.error(e)
+    except Exception as e:
+        st.error(e)
