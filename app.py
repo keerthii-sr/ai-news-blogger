@@ -38,7 +38,7 @@ if st.button("Generate AI Blog"):
     st.write(blog)
 
 sender = "keerthigowda366@gmail.com"
-receiver = "komalsingh2444@gmail.com"
+receiver = "keerthigowda366@gmail.com"
 password = "cvwlkrcriafrvurn"
 
 try:
