@@ -4,8 +4,8 @@ from groq import Groq
 import smtplib
 
 # API Keys
-NEWS_API = "8390c1e44dcf43e9ab7f69ec5101aa07"
-client = Groq(api_key="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")
+client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+NEWS_API = st.secrets["NEWS_API_KEY"]
 
 st.title("📰 AI News Auto Blogger")
 
